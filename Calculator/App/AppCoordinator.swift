@@ -19,7 +19,8 @@ class AppCoordinator {
     
     func start() {
         let calculatorVC = CalculatorVC(nibName: "CalculatorView", bundle: nil)
-//        let calculatorPresenter = CalculatorPresenter
+        let calculatorPresenter = CalculatorPresenter(delegate: calculatorVC)
+        calculatorVC.presenter = calculatorPresenter
 //        calculatorPresenter.delegate =
 //        calculatorVC.mediator =
 //        calculatorVC.presenter =

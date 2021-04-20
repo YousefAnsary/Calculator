@@ -26,6 +26,9 @@
 		CA1BB950262F0AC4001520AE /* Data+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1BB94D262F0AC4001520AE /* Data+Decodable.swift */; };
 		CA1BB951262F0AC4001520AE /* Result+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1BB94E262F0AC4001520AE /* Result+.swift */; };
 		CA1BB952262F0AC4001520AE /* URLResponse+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1BB94F262F0AC4001520AE /* URLResponse+.swift */; };
+		CA73ECE1262F6986006D3139 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA73ECE0262F6986006D3139 /* UICollectionView+.swift */; };
+		CA73ECE6262F6A29006D3139 /* MathOperationCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA73ECE5262F6A29006D3139 /* MathOperationCollectionCell.swift */; };
+		CA73ECEB262F6A42006D3139 /* MathOperationCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA73ECEA262F6A42006D3139 /* MathOperationCollectionCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +74,9 @@
 		CA1BB94D262F0AC4001520AE /* Data+Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Decodable.swift"; sourceTree = "<group>"; };
 		CA1BB94E262F0AC4001520AE /* Result+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Result+.swift"; sourceTree = "<group>"; };
 		CA1BB94F262F0AC4001520AE /* URLResponse+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLResponse+.swift"; sourceTree = "<group>"; };
+		CA73ECE0262F6986006D3139 /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
+		CA73ECE5262F6A29006D3139 /* MathOperationCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathOperationCollectionCell.swift; sourceTree = "<group>"; };
+		CA73ECEA262F6A42006D3139 /* MathOperationCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MathOperationCollectionCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +190,8 @@
 				CA1BB945262F0566001520AE /* CalculatorView.xib */,
 				CA1BB8BB262EFEA7001520AE /* CalculatorVC.swift */,
 				CA1BB8FA262F01B5001520AE /* CalculatorPresenter.swift */,
+				CA73ECEA262F6A42006D3139 /* MathOperationCollectionCell.xib */,
+				CA73ECE5262F6A29006D3139 /* MathOperationCollectionCell.swift */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -213,6 +221,7 @@
 				CA1BB94E262F0AC4001520AE /* Result+.swift */,
 				CA1BB94F262F0AC4001520AE /* URLResponse+.swift */,
 				CA1BB927262F03F7001520AE /* UIView+.swift */,
+				CA73ECE0262F6986006D3139 /* UICollectionView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -322,6 +331,7 @@
 			files = (
 				CA1BB946262F0566001520AE /* CalculatorView.xib in Resources */,
 				CA1BB8C4262EFEA8001520AE /* LaunchScreen.storyboard in Resources */,
+				CA73ECEB262F6A42006D3139 /* MathOperationCollectionCell.xib in Resources */,
 				CA1BB918262F0316001520AE /* API.plist in Resources */,
 				CA1BB8C1262EFEA8001520AE /* Assets.xcassets in Resources */,
 			);
@@ -350,6 +360,7 @@
 			files = (
 				CA1BB923262F03C9001520AE /* Delegate.swift in Sources */,
 				CA1BB905262F02B8001520AE /* BaseViewController.swift in Sources */,
+				CA73ECE6262F6A29006D3139 /* MathOperationCollectionCell.swift in Sources */,
 				CA1BB904262F02B8001520AE /* AppCoordinator.swift in Sources */,
 				CA1BB8BC262EFEA7001520AE /* CalculatorVC.swift in Sources */,
 				CA1BB917262F0316001520AE /* APIError.swift in Sources */,
@@ -360,6 +371,7 @@
 				CA1BB950262F0AC4001520AE /* Data+Decodable.swift in Sources */,
 				CA1BB8FB262F01B5001520AE /* CalculatorPresenter.swift in Sources */,
 				CA1BB928262F03F7001520AE /* UIView+.swift in Sources */,
+				CA73ECE1262F6986006D3139 /* UICollectionView+.swift in Sources */,
 				CA1BB8B8262EFEA7001520AE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
