@@ -7,11 +7,39 @@
 
 import Foundation
 
-enum MathOperator {
-    case add
-    case substract
-    case multiply
-    case divise
+enum MathOperator: String {
+    case add = "+"
+    case substract = "-"
+    case multiply = "*"
+    case divise = "/"
+    
+    func oppositeOpertaion()-> MathOperator {
+        switch self {
+        case .add:
+            return .substract
+        case .substract:
+            return .add
+        case .multiply:
+            return.divise
+        case .divise:
+            return .multiply
+        }
+    }
+    
+    func calculate(number1: Double, number2: Double)-> Double {
+        switch self {
+        case .add:
+            return number1 + number2
+        case .substract:
+            return number1 - number2
+        case .multiply:
+            return number1 * number2
+        case .divise:
+            guard number2 != 0 else { fatalError("Can't Divide By zero") }
+            return number1 / number2
+        }
+    }
+    
 }
 
 struct MathOperation {
@@ -62,6 +90,7 @@ class CalculatorPresenter {
         
         doneOperations.append(MathOperation(operator: operation, firstOperand: firstOperand, secondOperand: secondOperand))
         delegate?.reloadCollectionView()
+        delegate?.updateUndoBtnState(to: true)
         lastResult = result
         return String(result)
     }
@@ -71,7 +100,19 @@ class CalculatorPresenter {
             fatalError("Index \(indexPath.row) Out Of Range \(operationsCount)")
         }
         let item = doneOperations[indexPath.row]
-        return "\(item.operator)\(item.secondOperand)"
+        return "\(item.operator.rawValue) \(item.secondOperand)"
+    }
+    
+    func undo()-> String {
+        let operation = doneOperations.last!
+        doneOperations.removeLast()
+        if doneOperations.isEmpty {
+            delegate?.updateUndoBtnState(to: false)
+        }
+        delegate?.reloadCollectionView()
+        let res = operation.operator.oppositeOpertaion().calculate(number1: lastResult, number2: operation.secondOperand)
+        lastResult = res
+        return String(res)
     }
     
 }

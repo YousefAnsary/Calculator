@@ -9,6 +9,7 @@ import UIKit
 
 class CalculatorVC: BaseViewController {
 
+    //MARK: - Variables
     @IBOutlet private weak var resultLbl: UILabel!
     @IBOutlet private weak var secondOperandTF: UITextField!
     @IBOutlet private weak var undoBtn: UIButton!
@@ -23,6 +24,7 @@ class CalculatorVC: BaseViewController {
     var presenter: CalculatorPresenter?
     private var operatorBtns: [UIButton]!
     
+    //MARK: - View Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,8 +36,9 @@ class CalculatorVC: BaseViewController {
         operatorBtns = [plusBtn, minusBtn, multiplyBtn, diviseBtn]
     }
 
+    //MARK: - Tap Handlers
     @IBAction private func undoBtnTapped(_ sender: UIButton) {
-        
+        resultLbl.text = presenter?.undo()
     }
     
     @IBAction private func plusBtnTapped(_ sender: UIButton) {
@@ -55,6 +58,7 @@ class CalculatorVC: BaseViewController {
     }
     
     @IBAction private func equalBtnTapped(_ sender: UIButton) {
+        
         guard let selectedBtn = operatorBtns.first(where: { $0.isSelected }),
               let firstOperand = Double(resultLbl.text!),
               let secondOperand = Double(secondOperandTF.text!) else {return}
@@ -73,23 +77,33 @@ class CalculatorVC: BaseViewController {
             return
         }
         resultLbl.text = presenter?.calculate(firstOperand: firstOperand, secondOperand: secondOperand, operation: selectedOperator)
-        operatorBtns.forEach{$0.isSelected = false}
-        secondOperandTF.text = ""
-        equalBtn.isEnabled = false
+        resetCalculator()
     }
     
     @IBAction private func redoBtnTapped(_ sender: UIButton) {
         
     }
     
+}
+
+//MARK: - Private Functions
+extension CalculatorVC {
+    
     private func operatorBtnTapped(_ sender: UIButton) {
-        operatorBtns.filter{$0 != sender}.forEach{$0.isSelected = false}
+        operatorBtns.filter{$0 != sender}.deselectAll()
         sender.isSelected.toggle()
         equalBtn.isEnabled = !secondOperandTF.text!.isEmpty && sender.isSelected
     }
     
+    private func resetCalculator() {
+        operatorBtns.deselectAll()
+        secondOperandTF.text = ""
+        equalBtn.isEnabled = false
+    }
+    
 }
 
+//MARK: - Delegate
 extension CalculatorVC: CalculatorDelegate {
     
     func reloadCollectionView() {
@@ -106,6 +120,7 @@ extension CalculatorVC: CalculatorDelegate {
     
 }
 
+//MARK: - CollectionViewDelegate& DataSource
 extension CalculatorVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -122,7 +137,7 @@ extension CalculatorVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
         let label = UILabel(frame: CGRect.zero)
         label.text = presenter?.textForItemAt(indexPath: indexPath)
         label.sizeToFit()
-        return CGSize(width: label.frame.width + 16, height: 50)
+        return CGSize(width: label.frame.width + 24, height: 60)
     }
 
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -139,6 +154,7 @@ extension CalculatorVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
     
 }
 
+//MARK: - TextFieldDelegate
 extension CalculatorVC: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
