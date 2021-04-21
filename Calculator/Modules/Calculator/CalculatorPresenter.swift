@@ -60,7 +60,18 @@ class CalculatorPresenter {
     var selectedOperation: MathOperator?
     private var lastResult: Double = 0
     private weak var delegate: CalculatorDelegate?
-    private var doneOperations = [MathOperation]()
+    private var doneOperations = [MathOperation]() {
+        didSet {
+            delegate?.reloadCollectionView()
+            delegate?.updateUndoBtnState(to: !doneOperations.isEmpty)
+        }
+    }
+    private var redoOperations = [MathOperation]() {
+        didSet {
+            delegate?.updateRedoBtnState(to: !redoOperations.isEmpty)
+        }
+    }
+    
     var operationsCount: Int {
         doneOperations.count
     }
@@ -90,8 +101,8 @@ class CalculatorPresenter {
         
         doneOperations.append(MathOperation(operator: operation, firstOperand: firstOperand, secondOperand: secondOperand))
         delegate?.reloadCollectionView()
-        delegate?.updateUndoBtnState(to: true)
         lastResult = result
+        redoOperations.removeAll()
         return String(result)
     }
     
@@ -105,12 +116,19 @@ class CalculatorPresenter {
     
     func undo()-> String {
         let operation = doneOperations.last!
+        redoOperations.append(operation)
         doneOperations.removeLast()
-        if doneOperations.isEmpty {
-            delegate?.updateUndoBtnState(to: false)
-        }
         delegate?.reloadCollectionView()
         let res = operation.operator.oppositeOpertaion().calculate(number1: lastResult, number2: operation.secondOperand)
+        lastResult = res
+        return String(res)
+    }
+    
+    func redo()-> String {
+        let operation = redoOperations.last!
+        doneOperations.append(operation)
+        redoOperations.removeLast()
+        let res = operation.operator.calculate(number1: lastResult, number2: operation.secondOperand)
         lastResult = res
         return String(res)
     }

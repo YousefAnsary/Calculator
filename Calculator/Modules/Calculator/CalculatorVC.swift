@@ -81,7 +81,7 @@ class CalculatorVC: BaseViewController {
     }
     
     @IBAction private func redoBtnTapped(_ sender: UIButton) {
-        
+        resultLbl.text = presenter?.redo()
     }
     
 }
