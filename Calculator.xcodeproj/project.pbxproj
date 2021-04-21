@@ -30,6 +30,13 @@
 		CA73ECE6262F6A29006D3139 /* MathOperationCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA73ECE5262F6A29006D3139 /* MathOperationCollectionCell.swift */; };
 		CA73ECEB262F6A42006D3139 /* MathOperationCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA73ECEA262F6A42006D3139 /* MathOperationCollectionCell.xib */; };
 		CA73ECF3262F7C56006D3139 /* Array+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA73ECF2262F7C56006D3139 /* Array+UIButton.swift */; };
+		CABE702A26302DD6006CC7DC /* CurrencyConverterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CABE702926302DD6006CC7DC /* CurrencyConverterView.xib */; };
+		CABE702F26302DEF006CC7DC /* CurrencyConverterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABE702E26302DEF006CC7DC /* CurrencyConverterVC.swift */; };
+		CABE703426302E03006CC7DC /* CurrencyConverterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABE703326302E03006CC7DC /* CurrencyConverterPresenter.swift */; };
+		CABE703A26303148006CC7DC /* CurrencyCalculatorMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABE703926303148006CC7DC /* CurrencyCalculatorMediator.swift */; };
+		CABE703F26304606006CC7DC /* CurrencyConvertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABE703E26304606006CC7DC /* CurrencyConvertService.swift */; };
+		CABE704426305BC0006CC7DC /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABE704326305BC0006CC7DC /* UserDefaultsManager.swift */; };
+		CABE7049263068A2006CC7DC /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABE7048263068A2006CC7DC /* Double+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +86,13 @@
 		CA73ECE5262F6A29006D3139 /* MathOperationCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathOperationCollectionCell.swift; sourceTree = "<group>"; };
 		CA73ECEA262F6A42006D3139 /* MathOperationCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MathOperationCollectionCell.xib; sourceTree = "<group>"; };
 		CA73ECF2262F7C56006D3139 /* Array+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+UIButton.swift"; sourceTree = "<group>"; };
+		CABE702926302DD6006CC7DC /* CurrencyConverterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrencyConverterView.xib; sourceTree = "<group>"; };
+		CABE702E26302DEF006CC7DC /* CurrencyConverterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterVC.swift; sourceTree = "<group>"; };
+		CABE703326302E03006CC7DC /* CurrencyConverterPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterPresenter.swift; sourceTree = "<group>"; };
+		CABE703926303148006CC7DC /* CurrencyCalculatorMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCalculatorMediator.swift; sourceTree = "<group>"; };
+		CABE703E26304606006CC7DC /* CurrencyConvertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConvertService.swift; sourceTree = "<group>"; };
+		CABE704326305BC0006CC7DC /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		CABE7048263068A2006CC7DC /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +146,7 @@
 				CA1BB8EA262EFEAF001520AE /* App */,
 				CA1BB8EE262EFEC6001520AE /* Assets */,
 				CA1BB8EF262EFEDD001520AE /* Modules */,
+				CABE703826303128006CC7DC /* Mediator */,
 				CA1BB90C262F0316001520AE /* Service */,
 				CA1BB921262F035D001520AE /* Extension */,
 				CA1BB909262F0316001520AE /* Helper */,
@@ -182,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				CA1BB8F6262F0192001520AE /* Calculator */,
+				CABE702826302DB9006CC7DC /* CurrencyConverter */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -202,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				CA1BB90A262F0316001520AE /* JSONHelper.swift */,
+				CABE704326305BC0006CC7DC /* UserDefaultsManager.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -212,6 +229,7 @@
 				CA1BB910262F0316001520AE /* API.plist */,
 				CA1BB911262F0316001520AE /* APIManager.swift */,
 				CA1BB90F262F0316001520AE /* APIError.swift */,
+				CABE703E26304606006CC7DC /* CurrencyConvertService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -225,8 +243,27 @@
 				CA1BB927262F03F7001520AE /* UIView+.swift */,
 				CA73ECE0262F6986006D3139 /* UICollectionView+.swift */,
 				CA73ECF2262F7C56006D3139 /* Array+UIButton.swift */,
+				CABE7048263068A2006CC7DC /* Double+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		CABE702826302DB9006CC7DC /* CurrencyConverter */ = {
+			isa = PBXGroup;
+			children = (
+				CABE702926302DD6006CC7DC /* CurrencyConverterView.xib */,
+				CABE702E26302DEF006CC7DC /* CurrencyConverterVC.swift */,
+				CABE703326302E03006CC7DC /* CurrencyConverterPresenter.swift */,
+			);
+			path = CurrencyConverter;
+			sourceTree = "<group>";
+		};
+		CABE703826303128006CC7DC /* Mediator */ = {
+			isa = PBXGroup;
+			children = (
+				CABE703926303148006CC7DC /* CurrencyCalculatorMediator.swift */,
+			);
+			path = Mediator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -334,6 +371,7 @@
 			files = (
 				CA1BB946262F0566001520AE /* CalculatorView.xib in Resources */,
 				CA1BB8C4262EFEA8001520AE /* LaunchScreen.storyboard in Resources */,
+				CABE702A26302DD6006CC7DC /* CurrencyConverterView.xib in Resources */,
 				CA73ECEB262F6A42006D3139 /* MathOperationCollectionCell.xib in Resources */,
 				CA1BB918262F0316001520AE /* API.plist in Resources */,
 				CA1BB8C1262EFEA8001520AE /* Assets.xcassets in Resources */,
@@ -361,8 +399,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CABE703F26304606006CC7DC /* CurrencyConvertService.swift in Sources */,
 				CA1BB923262F03C9001520AE /* Delegate.swift in Sources */,
+				CABE703A26303148006CC7DC /* CurrencyCalculatorMediator.swift in Sources */,
 				CA1BB905262F02B8001520AE /* BaseViewController.swift in Sources */,
+				CABE7049263068A2006CC7DC /* Double+.swift in Sources */,
 				CA73ECE6262F6A29006D3139 /* MathOperationCollectionCell.swift in Sources */,
 				CA73ECF3262F7C56006D3139 /* Array+UIButton.swift in Sources */,
 				CA1BB904262F02B8001520AE /* AppCoordinator.swift in Sources */,
@@ -375,6 +416,9 @@
 				CA1BB950262F0AC4001520AE /* Data+Decodable.swift in Sources */,
 				CA1BB8FB262F01B5001520AE /* CalculatorPresenter.swift in Sources */,
 				CA1BB928262F03F7001520AE /* UIView+.swift in Sources */,
+				CABE703426302E03006CC7DC /* CurrencyConverterPresenter.swift in Sources */,
+				CABE704426305BC0006CC7DC /* UserDefaultsManager.swift in Sources */,
+				CABE702F26302DEF006CC7DC /* CurrencyConverterVC.swift in Sources */,
 				CA73ECE1262F6986006D3139 /* UICollectionView+.swift in Sources */,
 				CA1BB8B8262EFEA7001520AE /* AppDelegate.swift in Sources */,
 			);

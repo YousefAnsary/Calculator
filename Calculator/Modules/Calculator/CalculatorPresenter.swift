@@ -58,7 +58,8 @@ protocol CalculatorDelegate: Delegate {
 class CalculatorPresenter {
     
     var selectedOperation: MathOperator?
-    private var lastResult: Double = 0
+//    var undoManager = UndoManager()
+    private(set) var lastResult: Double = 0
     private weak var delegate: CalculatorDelegate?
     private var doneOperations = [MathOperation]() {
         didSet {
@@ -103,7 +104,7 @@ class CalculatorPresenter {
         delegate?.reloadCollectionView()
         lastResult = result
         redoOperations.removeAll()
-        return String(result)
+        return result.asFormattedString()
     }
     
     func textForItemAt(indexPath: IndexPath)-> String {
@@ -111,17 +112,18 @@ class CalculatorPresenter {
             fatalError("Index \(indexPath.row) Out Of Range \(operationsCount)")
         }
         let item = doneOperations[indexPath.row]
-        return "\(item.operator.rawValue) \(item.secondOperand)"
+        return "\(item.operator.rawValue) \(item.secondOperand.asFormattedString())"
     }
     
     func undo()-> String {
+        
         let operation = doneOperations.last!
         redoOperations.append(operation)
         doneOperations.removeLast()
         delegate?.reloadCollectionView()
         let res = operation.operator.oppositeOpertaion().calculate(number1: lastResult, number2: operation.secondOperand)
         lastResult = res
-        return String(res)
+        return res.asFormattedString()
     }
     
     func redo()-> String {
@@ -130,7 +132,16 @@ class CalculatorPresenter {
         redoOperations.removeLast()
         let res = operation.operator.calculate(number1: lastResult, number2: operation.secondOperand)
         lastResult = res
-        return String(res)
+        return res.asFormattedString()
+    }
+    
+    func currencyConversionMade(withResult res: String) {
+        guard let res = Double(res) else {return}
+        let _operator: MathOperator = lastResult > res ? .substract : .add
+        let mathOperation = MathOperation(operator: _operator, firstOperand: lastResult, secondOperand: abs(lastResult - res))
+        doneOperations.append(mathOperation)
+        delegate?.reloadCollectionView()
+        lastResult = res
     }
     
 }

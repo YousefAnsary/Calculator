@@ -22,23 +22,23 @@ class CalculatorVC: BaseViewController {
     @IBOutlet private weak var operationsCollectionView: UICollectionView!
     
     var presenter: CalculatorPresenter?
+    var mediator: CurrencyCalculatorMediator?
     private var operatorBtns: [UIButton]!
     
     //MARK: - View Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        operationsCollectionView.register(MathOperationCollectionCell.self)
-        secondOperandTF.delegate = self
-        operationsCollectionView.delegate = self
-        operationsCollectionView.dataSource = self
-        
+        configureViews()
         operatorBtns = [plusBtn, minusBtn, multiplyBtn, diviseBtn]
+        
     }
 
     //MARK: - Tap Handlers
     @IBAction private func undoBtnTapped(_ sender: UIButton) {
-        resultLbl.text = presenter?.undo()
+        let res = presenter?.undo()
+        resultLbl.text = res
+        mediator?.notify(res: res!, sender: self)
     }
     
     @IBAction private func plusBtnTapped(_ sender: UIButton) {
@@ -76,18 +76,33 @@ class CalculatorVC: BaseViewController {
         default:
             return
         }
-        resultLbl.text = presenter?.calculate(firstOperand: firstOperand, secondOperand: secondOperand, operation: selectedOperator)
+        let res = presenter?.calculate(firstOperand: firstOperand, secondOperand: secondOperand, operation: selectedOperator)
+        resultLbl.text = res
+        mediator?.notify(res: res!, sender: self)
         resetCalculator()
     }
     
     @IBAction private func redoBtnTapped(_ sender: UIButton) {
-        resultLbl.text = presenter?.redo()
+        let res = presenter?.redo()
+        resultLbl.text = res
+        mediator?.notify(res: res!, sender: self)
     }
     
 }
 
 //MARK: - Private Functions
 extension CalculatorVC {
+    
+    private func configureViews() {
+        configureCollectionView()
+        secondOperandTF.delegate = self
+    }
+    
+    private func configureCollectionView() {
+        operationsCollectionView.register(MathOperationCollectionCell.self)
+        operationsCollectionView.delegate = self
+        operationsCollectionView.dataSource = self
+    }
     
     private func operatorBtnTapped(_ sender: UIButton) {
         operatorBtns.filter{$0 != sender}.deselectAll()
@@ -116,6 +131,16 @@ extension CalculatorVC: CalculatorDelegate {
     
     func updateRedoBtnState(to value: Bool) {
         redoBtn.isEnabled = value
+    }
+    
+}
+
+//MARK: - Mediator
+extension CalculatorVC: CalculatorMediator {
+    
+    func currencyConversionMade(withResult res: String) {
+        self.resultLbl.text = res
+        self.presenter?.currencyConversionMade(withResult: res)
     }
     
 }

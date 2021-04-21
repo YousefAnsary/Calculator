@@ -22,4 +22,17 @@ extension Result where Success == Data, Failure == APIError {
         }
     }
     
+    func mappingToDictionary()-> Result<[String: Any?]?, Failure> {
+        switch self {
+        case .success(let data):
+            do {
+                return .success(try data.toDictionary())
+            } catch(let err) {
+                return .failure(APIError.decodingFailed(data: data, error: err))
+            }
+        case .failure(let err):
+            return .failure(err)
+        }
+    }
+    
 }
