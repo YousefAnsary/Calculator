@@ -22,7 +22,7 @@ class CalculatorVC: BaseViewController {
     @IBOutlet private weak var operationsCollectionView: UICollectionView!
     
     var presenter: CalculatorPresenter?
-    var mediator: CurrencyCalculatorMediator?
+//    var mediator: CurrencyCalculatorMediator?
     private var operatorBtns: [UIButton]!
     
     //MARK: - View Life Cycle Methods
@@ -121,9 +121,8 @@ extension CalculatorVC {
 //MARK: - Delegate
 extension CalculatorVC: CalculatorDelegate {
     
-    func calculation(MadeWithResult result: String) {
+    func calculation(madeWithResult result: String) {
         self.resultLbl.text = result
-        mediator?.notify(res: result, sender: self)
     }
     
     func reloadCollectionView() {
@@ -136,16 +135,6 @@ extension CalculatorVC: CalculatorDelegate {
     
     func updateRedoBtnState(to value: Bool) {
         redoBtn.isEnabled = value
-    }
-    
-}
-
-//MARK: - Mediator
-extension CalculatorVC: CalculatorMediator {
-    
-    func currencyConversionMade(withResult res: String) {
-        self.resultLbl.text = res
-        self.presenter?.currencyConversionMade(withResult: res)
     }
     
 }
@@ -168,6 +157,10 @@ extension CalculatorVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
         label.text = presenter?.textForItemAt(indexPath: indexPath)
         label.sizeToFit()
         return CGSize(width: label.frame.width + 24, height: 60)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
     }
 
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

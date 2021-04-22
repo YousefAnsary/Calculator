@@ -28,6 +28,8 @@
 		CA1BB952262F0AC4001520AE /* URLResponse+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1BB94F262F0AC4001520AE /* URLResponse+.swift */; };
 		CA668FFB26319E3B0081BA20 /* MathOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA668FFA26319E3B0081BA20 /* MathOperation.swift */; };
 		CA66900026319E5C0081BA20 /* MathOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA668FFF26319E5C0081BA20 /* MathOperator.swift */; };
+		CA66900526319EEA0081BA20 /* CalculationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA66900426319EEA0081BA20 /* CalculationState.swift */; };
+		CA66900D2631BB330081BA20 /* ClaculatorStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA66900C2631BB330081BA20 /* ClaculatorStateManager.swift */; };
 		CA73ECE1262F6986006D3139 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA73ECE0262F6986006D3139 /* UICollectionView+.swift */; };
 		CA73ECE6262F6A29006D3139 /* MathOperationCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA73ECE5262F6A29006D3139 /* MathOperationCollectionCell.swift */; };
 		CA73ECEB262F6A42006D3139 /* MathOperationCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA73ECEA262F6A42006D3139 /* MathOperationCollectionCell.xib */; };
@@ -86,6 +88,8 @@
 		CA1BB94F262F0AC4001520AE /* URLResponse+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLResponse+.swift"; sourceTree = "<group>"; };
 		CA668FFA26319E3B0081BA20 /* MathOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathOperation.swift; sourceTree = "<group>"; };
 		CA668FFF26319E5C0081BA20 /* MathOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathOperator.swift; sourceTree = "<group>"; };
+		CA66900426319EEA0081BA20 /* CalculationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationState.swift; sourceTree = "<group>"; };
+		CA66900C2631BB330081BA20 /* ClaculatorStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaculatorStateManager.swift; sourceTree = "<group>"; };
 		CA73ECE0262F6986006D3139 /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		CA73ECE5262F6A29006D3139 /* MathOperationCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathOperationCollectionCell.swift; sourceTree = "<group>"; };
 		CA73ECEA262F6A42006D3139 /* MathOperationCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MathOperationCollectionCell.xib; sourceTree = "<group>"; };
@@ -215,6 +219,7 @@
 				CA1BB8FA262F01B5001520AE /* CalculatorPresenter.swift */,
 				CA73ECEA262F6A42006D3139 /* MathOperationCollectionCell.xib */,
 				CA73ECE5262F6A29006D3139 /* MathOperationCollectionCell.swift */,
+				CA66900C2631BB330081BA20 /* ClaculatorStateManager.swift */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -258,6 +263,7 @@
 			children = (
 				CA668FFA26319E3B0081BA20 /* MathOperation.swift */,
 				CA668FFF26319E5C0081BA20 /* MathOperator.swift */,
+				CA66900426319EEA0081BA20 /* CalculationState.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -413,6 +419,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA66900526319EEA0081BA20 /* CalculationState.swift in Sources */,
 				CABE703F26304606006CC7DC /* CurrencyConvertService.swift in Sources */,
 				CA1BB923262F03C9001520AE /* Delegate.swift in Sources */,
 				CABE703A26303148006CC7DC /* CurrencyCalculatorMediator.swift in Sources */,
@@ -427,6 +434,7 @@
 				CA66900026319E5C0081BA20 /* MathOperator.swift in Sources */,
 				CA1BB952262F0AC4001520AE /* URLResponse+.swift in Sources */,
 				CA1BB919262F0316001520AE /* APIManager.swift in Sources */,
+				CA66900D2631BB330081BA20 /* ClaculatorStateManager.swift in Sources */,
 				CA1BB951262F0AC4001520AE /* Result+.swift in Sources */,
 				CA1BB913262F0316001520AE /* JSONHelper.swift in Sources */,
 				CA1BB950262F0AC4001520AE /* Data+Decodable.swift in Sources */,

@@ -15,6 +15,7 @@ protocol CurrencyConverterDelegate: Delegate {
 class CurrencyConverterPresenter {
     
     private weak var delegate: CurrencyConverterDelegate?
+    var mediator: CurrencyCalculatorMediator?
     private(set) var lastCalculation: String?
     
     init(delegate: CurrencyConverterDelegate) {
@@ -26,13 +27,15 @@ class CurrencyConverterPresenter {
         guard let amount = Double(amount) else {return}
         
         CurrencyConvertService.EGP_USDRatio { [weak self] res in
+            guard let self = self else {return}
             switch res {
             case .success(let dict):
-                guard let ratio = dict?["EGP_USD"] as? Double else { self?.convertFailed(withError: nil, forAmount: amount); return }
+                guard let ratio = dict?["EGP_USD"] as? Double else { self.convertFailed(withError: nil, forAmount: amount); return }
                 UserDefaultsManager.shared.EGP_USDRatio = ratio
-                self?.delegate?.conversion(successWithResult: ratio * amount)
+                self.delegate?.conversion(successWithResult: ratio * amount)
+                self.mediator?.notify(res: String(amount), sender: self)
             case .failure(let err):
-                self?.convertFailed(withError: err, forAmount: amount)
+                self.convertFailed(withError: err, forAmount: amount)
             }
         }
         
@@ -44,9 +47,14 @@ class CurrencyConverterPresenter {
             return
         }
         delegate?.conversion(successWithResult: ratio * amount)
+        mediator?.notify(res: String(amount), sender: self)
     }
     
-    func storeLastCalculation(_ res: String) {
+}
+
+extension CurrencyConverterPresenter: CurrencyConverterMediator {
+    
+    func caculationMade(withResult res: String) {
         lastCalculation = res
     }
     

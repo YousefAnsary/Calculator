@@ -14,7 +14,7 @@ class CurrencyConverterVC: BaseViewController {
     @IBOutlet private weak var convertBtn: UIButton!
     @IBOutlet private weak var resultLbl: UILabel!
     var presenter: CurrencyConverterPresenter?
-    var mediator: CurrencyCalculatorMediator?
+    
     
     //MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -52,21 +52,11 @@ extension CurrencyConverterVC: CurrencyConverterDelegate {
     
     func conversion(successWithResult result: Double) {
         resultLbl.text = "\(result.asFormattedString()) USD"
-        mediator?.notify(res: result.asFormattedString(), sender: self)
     }
     
     func conversion(failedWithError error: APIError) {
         resultLbl.text = ""
         self.handleError(error: error)
-    }
-    
-}
-
-//MARK: - Mediator
-extension CurrencyConverterVC: CurrencyConverterMediator {
-    
-    func caculationMade(withResult res: String) {
-        self.presenter?.storeLastCalculation(res)
     }
     
 }
