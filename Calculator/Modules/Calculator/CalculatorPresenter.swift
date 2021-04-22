@@ -40,7 +40,6 @@ class CalculatorPresenter {
         stateManager.newCalculation(MathOperation(operator: operation, firstOperand: firstOperand, secondOperand: secondOperand))
         
         fireDelegates()
-        mediator?.notify(res: stateManager.current.finalResult.asFormattedString(), sender: self)
         
     }
     
@@ -52,16 +51,19 @@ class CalculatorPresenter {
         return "\(item.operator.rawValue) \(item.secondOperand.asFormattedString())"
     }
     
+    func cellTapped(AtIndex index: IndexPath) {
+        stateManager.undo(operationAt: index.row)
+        fireDelegates()
+    }
+    
     func undo() {
         stateManager.undo()
         fireDelegates()
-        mediator?.notify(res: stateManager.current.finalResult.asFormattedString(), sender: self)
     }
     
     func redo() {
         stateManager.redo()
         fireDelegates()
-        mediator?.notify(res: stateManager.current.finalResult.asFormattedString(), sender: self)
     }
     
     private func fireDelegates() {
@@ -69,6 +71,7 @@ class CalculatorPresenter {
         delegate?.updateRedoBtnState(to: stateManager.canRedo())
         delegate?.reloadCollectionView()
         delegate?.calculation(madeWithResult: stateManager.current.finalResult.asFormattedString())
+        mediator?.notify(res: stateManager.current.finalResult.asFormattedString(), sender: self)
     }
     
 }

@@ -10,8 +10,14 @@ import Foundation
 struct CalculationState {
     
     var operations: [MathOperation]
+    var selectedUndoneOperations = [MathOperation]()
+    private var _finalRes: Double?
     var finalResult: Double {
-        operations.last?.result ?? 0
+        get {
+            return _finalRes != nil ? _finalRes! : operations.last?.result ?? 0
+        } set {
+            _finalRes = newValue
+        }
     }
     
     init(operations: [MathOperation]) {
