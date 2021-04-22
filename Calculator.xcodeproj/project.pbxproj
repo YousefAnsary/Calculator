@@ -26,6 +26,8 @@
 		CA1BB950262F0AC4001520AE /* Data+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1BB94D262F0AC4001520AE /* Data+Decodable.swift */; };
 		CA1BB951262F0AC4001520AE /* Result+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1BB94E262F0AC4001520AE /* Result+.swift */; };
 		CA1BB952262F0AC4001520AE /* URLResponse+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1BB94F262F0AC4001520AE /* URLResponse+.swift */; };
+		CA668FFB26319E3B0081BA20 /* MathOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA668FFA26319E3B0081BA20 /* MathOperation.swift */; };
+		CA66900026319E5C0081BA20 /* MathOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA668FFF26319E5C0081BA20 /* MathOperator.swift */; };
 		CA73ECE1262F6986006D3139 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA73ECE0262F6986006D3139 /* UICollectionView+.swift */; };
 		CA73ECE6262F6A29006D3139 /* MathOperationCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA73ECE5262F6A29006D3139 /* MathOperationCollectionCell.swift */; };
 		CA73ECEB262F6A42006D3139 /* MathOperationCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA73ECEA262F6A42006D3139 /* MathOperationCollectionCell.xib */; };
@@ -82,6 +84,8 @@
 		CA1BB94D262F0AC4001520AE /* Data+Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Decodable.swift"; sourceTree = "<group>"; };
 		CA1BB94E262F0AC4001520AE /* Result+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Result+.swift"; sourceTree = "<group>"; };
 		CA1BB94F262F0AC4001520AE /* URLResponse+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLResponse+.swift"; sourceTree = "<group>"; };
+		CA668FFA26319E3B0081BA20 /* MathOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathOperation.swift; sourceTree = "<group>"; };
+		CA668FFF26319E5C0081BA20 /* MathOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathOperator.swift; sourceTree = "<group>"; };
 		CA73ECE0262F6986006D3139 /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		CA73ECE5262F6A29006D3139 /* MathOperationCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathOperationCollectionCell.swift; sourceTree = "<group>"; };
 		CA73ECEA262F6A42006D3139 /* MathOperationCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MathOperationCollectionCell.xib; sourceTree = "<group>"; };
@@ -146,6 +150,7 @@
 				CA1BB8EA262EFEAF001520AE /* App */,
 				CA1BB8EE262EFEC6001520AE /* Assets */,
 				CA1BB8EF262EFEDD001520AE /* Modules */,
+				CA668FF926319E280081BA20 /* Model */,
 				CABE703826303128006CC7DC /* Mediator */,
 				CA1BB90C262F0316001520AE /* Service */,
 				CA1BB921262F035D001520AE /* Extension */,
@@ -246,6 +251,15 @@
 				CABE7048263068A2006CC7DC /* Double+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		CA668FF926319E280081BA20 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CA668FFA26319E3B0081BA20 /* MathOperation.swift */,
+				CA668FFF26319E5C0081BA20 /* MathOperator.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		CABE702826302DB9006CC7DC /* CurrencyConverter */ = {
@@ -404,11 +418,13 @@
 				CABE703A26303148006CC7DC /* CurrencyCalculatorMediator.swift in Sources */,
 				CA1BB905262F02B8001520AE /* BaseViewController.swift in Sources */,
 				CABE7049263068A2006CC7DC /* Double+.swift in Sources */,
+				CA668FFB26319E3B0081BA20 /* MathOperation.swift in Sources */,
 				CA73ECE6262F6A29006D3139 /* MathOperationCollectionCell.swift in Sources */,
 				CA73ECF3262F7C56006D3139 /* Array+UIButton.swift in Sources */,
 				CA1BB904262F02B8001520AE /* AppCoordinator.swift in Sources */,
 				CA1BB8BC262EFEA7001520AE /* CalculatorVC.swift in Sources */,
 				CA1BB917262F0316001520AE /* APIError.swift in Sources */,
+				CA66900026319E5C0081BA20 /* MathOperator.swift in Sources */,
 				CA1BB952262F0AC4001520AE /* URLResponse+.swift in Sources */,
 				CA1BB919262F0316001520AE /* APIManager.swift in Sources */,
 				CA1BB951262F0AC4001520AE /* Result+.swift in Sources */,

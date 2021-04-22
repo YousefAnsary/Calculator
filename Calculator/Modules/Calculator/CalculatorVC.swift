@@ -36,9 +36,9 @@ class CalculatorVC: BaseViewController {
 
     //MARK: - Tap Handlers
     @IBAction private func undoBtnTapped(_ sender: UIButton) {
-        let res = presenter?.undo()
-        resultLbl.text = res
-        mediator?.notify(res: res!, sender: self)
+        presenter?.undo()
+//        resultLbl.text = res
+//        mediator?.notify(res: res!, sender: self)
     }
     
     @IBAction private func plusBtnTapped(_ sender: UIButton) {
@@ -76,16 +76,16 @@ class CalculatorVC: BaseViewController {
         default:
             return
         }
-        let res = presenter?.calculate(firstOperand: firstOperand, secondOperand: secondOperand, operation: selectedOperator)
-        resultLbl.text = res
-        mediator?.notify(res: res!, sender: self)
+        presenter?.calculate(firstOperand: firstOperand, secondOperand: secondOperand, operation: selectedOperator)
+//        resultLbl.text = res
+//        mediator?.notify(res: res!, sender: self)
         resetCalculator()
     }
     
     @IBAction private func redoBtnTapped(_ sender: UIButton) {
-        let res = presenter?.redo()
-        resultLbl.text = res
-        mediator?.notify(res: res!, sender: self)
+        presenter?.redo()
+//        resultLbl.text = res
+//        mediator?.notify(res: res!, sender: self)
     }
     
 }
@@ -120,6 +120,11 @@ extension CalculatorVC {
 
 //MARK: - Delegate
 extension CalculatorVC: CalculatorDelegate {
+    
+    func calculation(MadeWithResult result: String) {
+        self.resultLbl.text = result
+        mediator?.notify(res: result, sender: self)
+    }
     
     func reloadCollectionView() {
         operationsCollectionView.reloadData()
