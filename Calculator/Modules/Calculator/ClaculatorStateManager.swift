@@ -12,7 +12,6 @@ class ClaculatorStateManager {
     private var states: [CalculationState]
     private let statesAccessQueue: DispatchQueue
     private var lastUndoneStateIndex: Int
-    private var selectedUndoneIndex: Int?
     var current: CalculationState {
         statesAccessQueue.sync {
             states.last!
@@ -25,95 +24,96 @@ class ClaculatorStateManager {
         lastUndoneStateIndex = -1
     }
     
+    /// Inserts new state to done operations
+    /// - Parameter op: New done operation
     func newCalculation(_ op: MathOperation) {
-//        state(atIndex: states.endIndex)
-//        var lastState: CalculationState!
-//        statesAccessQueue.sync {
-//            lastState = states.last!
-//        }
-        
-        var lastState = states.last! //current
-        
+        var lastState = current
         lastState.newOperation(op)
-        states.append(lastState)
         
-//        makeWriteOperationOnStates { states in
-//            states.append(lastState)
-//        }
+        statesAccessQueue.async(flags: .barrier) {
+            self.states.append(lastState)
+        }
         
-//        statesAccessQueue.async(flags: .barrier) {
-//            self.states.append(lastState)
-//        }
+        DispatchQueue.main.async {
+            self.resetCounter()
+        }
         
-        resetCounter()
     }
     
+    
+    /// Undoes last done operation if possible and updates current state
     func undo() {
         guard canUndo() else { return }
+        
         if lastUndoneStateIndex == -1 { lastUndoneStateIndex = states.endIndex - 1 }
         lastUndoneStateIndex -= 1
-        var state = states[lastUndoneStateIndex]// getState(atIndex: lastUndoneStateIndex)
-//        var state: CalculationState!
-//        statesAccessQueue.sync {
-//            state = states[lastUndoneStateIndex]
-//        }
+        
+        var state = getState(atIndex: lastUndoneStateIndex)
         
         state.isCopy = true
-        self.states.append(state)
-//        makeWriteOperationOnStates { states in
-//            states.append(state)
-//        }
-//        statesAccessQueue.async(flags: .barrier) {
-//            self.states.append(state)
-//        }
-    }
-    
-    func undo(operationAt index: Int) {
-//        let index = index - 1
-        guard index >= 0, index < states.count else { return }
-        var state = current
-        state.undoOperationAt(index: index)
-        state.isCopy = true
+        
         makeWriteOperationOnStates { states in
             states.append(state)
         }
-//        statesAccessQueue.async(flags: .barrier) {
-//            self.states.append(state)
-//        }
-        resetCounter()
+        
     }
     
+    
+    /// Undones operation at given index by applying the reverse of it and updating current state
+    /// - Parameter index: Index of operation to be undone
+    func undo(operationAt index: Int) {
+        guard index >= 0, index < states.count else { return }
+        
+        var state = current
+        state.undoOperationAt(index: index)
+        state.isCopy = true
+        
+        makeWriteOperationOnStates { states in
+            states.append(state)
+        }
+        
+        DispatchQueue.main.async {
+            self.resetCounter()
+        }
+        
+    }
+    
+    /// Redoes last undone operation if possible and update current state
     func redo() {
         guard canRedo() else {
             if getState(atIndex: lastUndoneStateIndex + 1).isCopy { resetCounter() }
             return
         }
+        
         lastUndoneStateIndex += 1
         
-        var state = getState(atIndex: lastUndoneStateIndex)//: CalculationState!
-//        statesAccessQueue.sync {
-//            state = states[lastUndoneStateIndex]
-//        }
+        var state = getState(atIndex: lastUndoneStateIndex)
+        
         state.isCopy = true
+        
         makeWriteOperationOnStates { states in
             states.append(state)
         }
-//        statesAccessQueue.async(flags: .barrier) {
-//            self.states.append(state)
-//        }
+        
     }
     
+    
+    /// Checks if there is an undoable action
+    /// - Returns: Boolean states if there is any undoables
     func canUndo()-> Bool {
         let index = lastUndoneStateIndex == -1 ? states.endIndex - 1 : lastUndoneStateIndex
         return index > 0
     }
     
+    /// Checks if there is an redoable action
+    /// - Returns: Boolean states if there is any redoables
     func canRedo()-> Bool {
         lastUndoneStateIndex != -1 &&
         lastUndoneStateIndex < (states.endIndex - 2) &&
         !getState(atIndex: lastUndoneStateIndex + 1).isCopy
     }
     
+    /// Resets the counter to last index and assign all operations as non-copies
     private func resetCounter() {
         lastUndoneStateIndex = states.endIndex - 1
         statesAccessQueue.async(flags: .barrier) {
@@ -121,12 +121,16 @@ class ClaculatorStateManager {
         }
     }
     
+    /// Fires Given Block on specific Dispatch Queue to assure a thread safe access
     private func makeWriteOperationOnStates(_ block: @escaping (inout [CalculationState])-> Void) {
         statesAccessQueue.async(flags: .barrier) {
             block(&self.states)
         }
     }
     
+    /// Gets state of specific index on specific Dispatch Queue to assure a thread safe access
+    /// - Parameter index: Index of wanted state
+    /// - Returns: CalculationState object at given index
     private func getState(atIndex index: Int)-> CalculationState {
         var state: CalculationState!
         statesAccessQueue.sync {

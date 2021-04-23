@@ -21,9 +21,8 @@ class CalculatorVC: BaseViewController {
     @IBOutlet private weak var redoBtn: UIButton!
     @IBOutlet private weak var operationsCollectionView: UICollectionView!
     
-    var presenter: CalculatorPresenter?
-//    var mediator: CurrencyCalculatorMediator?
     private var operatorBtns: [UIButton]!
+    var presenter: CalculatorPresenter?
     
     //MARK: - View Life Cycle Methods
     override func viewDidLoad() {
@@ -37,8 +36,6 @@ class CalculatorVC: BaseViewController {
     //MARK: - Tap Handlers
     @IBAction private func undoBtnTapped(_ sender: UIButton) {
         presenter?.undo()
-//        resultLbl.text = res
-//        mediator?.notify(res: res!, sender: self)
     }
     
     @IBAction private func plusBtnTapped(_ sender: UIButton) {
@@ -76,16 +73,13 @@ class CalculatorVC: BaseViewController {
         default:
             return
         }
+        
         presenter?.calculate(firstOperand: firstOperand, secondOperand: secondOperand, operation: selectedOperator)
-//        resultLbl.text = res
-//        mediator?.notify(res: res!, sender: self)
         resetCalculator()
     }
     
     @IBAction private func redoBtnTapped(_ sender: UIButton) {
         presenter?.redo()
-//        resultLbl.text = res
-//        mediator?.notify(res: res!, sender: self)
     }
     
 }
@@ -162,18 +156,6 @@ extension CalculatorVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         presenter?.cellTapped(AtIndex: indexPath)
     }
-
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        return 0
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 10
-//    }
     
 }
 

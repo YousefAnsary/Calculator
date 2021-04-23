@@ -13,7 +13,9 @@ enum MathOperator: String {
     case multiply = "*"
     case divise = "/"
     
-    func oppositeOpertaion()-> MathOperator {
+    /// Reverses the operator
+    /// - Returns: MathOperator of the reverse, i.e. substract if current is add
+    func reversed()-> MathOperator {
         switch self {
         case .add:
             return .substract
@@ -26,6 +28,8 @@ enum MathOperator: String {
         }
     }
     
+    /// Calculates given two numbers using current operator
+    /// - Returns: Double of calculation result
     func calculate(number1: Double, number2: Double)-> Double {
         switch self {
         case .add:

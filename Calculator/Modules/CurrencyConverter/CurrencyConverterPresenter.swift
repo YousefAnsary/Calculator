@@ -8,7 +8,11 @@
 import Foundation
 
 protocol CurrencyConverterDelegate: Delegate {
+    /// Called on succes conversions
+    /// - Parameter result: Result of conversion operation as Double
     func conversion(successWithResult result: Double)
+    /// Called on failed conversions
+    /// - Parameter error: APIError occured
     func conversion(failedWithError error: APIError)
 }
 
@@ -22,6 +26,8 @@ class CurrencyConverterPresenter {
         self.delegate = delegate
     }
     
+    /// Converts given amount of EGPs to USD and delegates it
+    /// - Parameter amount: amount to be converted from EGP to USD
     func convert(amount: String) {
         
         guard let amount = Double(amount) else {return}
@@ -41,6 +47,10 @@ class CurrencyConverterPresenter {
         
     }
     
+    /// Called if failed to fetch ratio from API to convert using local saved ratio if any
+    /// - Parameters:
+    ///   - error: APIError object Returned from service layer
+    ///   - amount: Given amount to convert using local saved ratio if any
     private func convertFailed(withError error: APIError?, forAmount amount: Double) {
         guard let ratio = UserDefaultsManager.shared.EGP_USDRatio else {
             delegate?.conversion(failedWithError: error ?? .unknown(statusCode: 0, data: nil, error: nil))

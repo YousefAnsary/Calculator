@@ -8,9 +8,15 @@
 import Foundation
 
 protocol CalculatorDelegate: Delegate {
+    /// Called to update isEnabled property of undo btn
+    /// - Parameter value: Bool indicates if there is any undoables
     func updateUndoBtnState(to value: Bool)
+    /// Called to update isEnabled property of redo btn
+    /// - Parameter value: Bool indicates if there is any redoables
     func updateRedoBtnState(to value: Bool)
+    /// Called to update operations shown in the CollectionView
     func reloadCollectionView()
+    /// Called to delegate the result of last operation
     func calculation(madeWithResult result: String)
 }
 
@@ -31,6 +37,12 @@ class CalculatorPresenter {
         stateManager = ClaculatorStateManager()
     }
     
+    
+    /// Makes given math operation, stores it to undo history and delegates result
+    /// - Parameters:
+    ///   - firstOperand: First operand in the math equation
+    ///   - secondOperand: First operand in the math equation
+    ///   - operation: Operator Type
     func calculate(firstOperand: Double, secondOperand: Double, operation: MathOperator) {
         
         if case MathOperator.divise = operation, secondOperand == 0 {
@@ -43,6 +55,9 @@ class CalculatorPresenter {
         
     }
     
+    /// Returns formatted string describing operation at given index
+    /// - Parameter indexPath: Index of requird operation
+    /// - Returns: Operation described as String like `+5`
     func textForItemAt(indexPath: IndexPath)-> String {
         guard indexPath.row < operationsCount else {
             fatalError("Index \(indexPath.row) Out Of Range \(operationsCount)")
@@ -78,11 +93,11 @@ class CalculatorPresenter {
 
 extension CalculatorPresenter: CalculatorMediator {
     
-    func currencyConversionMade(withResult res: String) {
-        guard let res = Double(res) else {return}
+    func currencyConversionMade(fromGivenAmount amount: String) {
+        guard let amount = Double(amount) else {return}
         let finalRes = stateManager.current.finalResult
-        let op: MathOperator = finalRes > res ? .substract : .add
-        let diff = abs(finalRes - res)
+        let op: MathOperator = finalRes > amount ? .substract : .add
+        let diff = abs(finalRes - amount)
         stateManager.newCalculation(MathOperation(operator: op, firstOperand: stateManager.current.finalResult, secondOperand: diff))
         fireDelegates()
     }

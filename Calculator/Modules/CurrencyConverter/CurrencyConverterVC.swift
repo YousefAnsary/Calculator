@@ -15,7 +15,6 @@ class CurrencyConverterVC: BaseViewController {
     @IBOutlet private weak var resultLbl: UILabel!
     var presenter: CurrencyConverterPresenter?
     
-    
     //MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()

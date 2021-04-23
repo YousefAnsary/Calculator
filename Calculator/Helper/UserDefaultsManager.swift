@@ -17,6 +17,7 @@ class UserDefaultsManager {
     
     static let shared = UserDefaultsManager()
     
+    /// Saved Ratio of EGP to USD currencies if any
     var EGP_USDRatio: Double? {
         get {
             return userDefaults.double(forKey: EGP_USDRatioKey)
