@@ -11,6 +11,7 @@ struct MathOperation {
     let `operator`: MathOperator
     let firstOperand: Double
     let secondOperand: Double
+//    var isSelectivelyUndone = false
     var result: Double {
         self.operator.calculate(number1: firstOperand, number2: secondOperand)
     }
