@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// View Controller of Currency Converter Module
 class CurrencyConverterVC: BaseViewController {
 
     //MARK: - Variables
@@ -39,7 +40,7 @@ class CurrencyConverterVC: BaseViewController {
 //MARK: - Private Functions
 extension CurrencyConverterVC {
     
-    func configureViews() {
+    private func configureViews() {
         resultLbl.text = ""
         egpTF.delegate = self
     }
@@ -49,10 +50,14 @@ extension CurrencyConverterVC {
 //MARK: - Delegate
 extension CurrencyConverterVC: CurrencyConverterDelegate {
     
+    /// Called on successful Conversion is Made to update views
+    /// - Parameter result: Result of conversion operation as Double
     func conversion(successWithResult result: Double) {
         resultLbl.text = "\(result.asFormattedString()) USD"
     }
     
+    /// Called when conversion operation fails to handle the error
+    /// - Parameter error: APIError object returned from service layer
     func conversion(failedWithError error: APIError) {
         resultLbl.text = ""
         self.handleError(error: error)

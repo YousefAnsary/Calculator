@@ -7,15 +7,17 @@
 
 import Foundation
 
+/// Delegate of Currency Converter Module
 protocol CurrencyConverterDelegate: Delegate {
     /// Called on succes conversions
     /// - Parameter result: Result of conversion operation as Double
     func conversion(successWithResult result: Double)
     /// Called on failed conversions
-    /// - Parameter error: APIError occured
+    /// - Parameter error: APIError object returned from service layer
     func conversion(failedWithError error: APIError)
 }
 
+/// Presenter of Currency Converter Module
 class CurrencyConverterPresenter {
     
     private weak var delegate: CurrencyConverterDelegate?
@@ -62,8 +64,10 @@ class CurrencyConverterPresenter {
     
 }
 
+// MARK: - Mediator
 extension CurrencyConverterPresenter: CurrencyConverterMediator {
     
+    /// Called whenever calculator makes a new operation to store it to be used as currency input
     func caculationMade(withResult res: String) {
         lastCalculation = res
     }
