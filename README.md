@@ -8,8 +8,8 @@
 - [x] Selective Undo for each operation
 - [x] MVP Architected
 - [x] Unit Tested (Currency Converter Only)
-- [x] Documented Code using Jazzy (Currency Converter Only)
-- [x] Test Coverage Report using Slather
+- [x] Documented Code using Jazzy in /docs/index.html (Currency Converter Only)
+- [x] Test Coverage Report using Slather in /html/index.html
 
 <br/>
 
