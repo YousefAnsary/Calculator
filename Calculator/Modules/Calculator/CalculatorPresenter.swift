@@ -26,8 +26,6 @@ class CalculatorPresenter {
     private let stateManager: ClaculatorStateManager
     var mediator: CurrencyCalculatorMediator?
     
-    var lastOperation = MathOperation(operator: .add, firstOperand: 0, secondOperand: 0)
-    
     var operationsCount: Int {
         stateManager.current.operations.count
     }
@@ -66,16 +64,20 @@ class CalculatorPresenter {
         return "\(item.operator.rawValue) \(item.secondOperand.asFormattedString())"
     }
     
+    /// Called to undo operation at given index
+    /// - Parameter index: IndexPath of tapped cell to undo its operation
     func cellTapped(AtIndex index: IndexPath) {
         stateManager.undo(operationAt: index.row)
         fireDelegates()
     }
     
+    /// Undoes last done operation if possible and delegates result
     func undo() {
         stateManager.undo()
         fireDelegates()
     }
     
+    /// Redoes last undone operation if possible and delegates result
     func redo() {
         stateManager.redo()
         fireDelegates()
@@ -91,6 +93,8 @@ class CalculatorPresenter {
     
 }
 
+
+//MARK: - Mediator
 extension CalculatorPresenter: CalculatorMediator {
     
     func currencyConversionMade(fromGivenAmount amount: String) {
