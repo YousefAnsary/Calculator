@@ -7,8 +7,7 @@
 
 import UIKit
 
-class BaseViewController: UIViewController {
-    
+class BaseViewController: UIViewController, Delegate {
     
     func displayAlert(withMessage message: String, title: String? = nil, btnHandler: ((UIAlertAction)-> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -16,6 +15,10 @@ class BaseViewController: UIViewController {
         DispatchQueue.main.async {
             self.present(alert, animated: true)
         }
+    }
+    
+    func displayAlert(withMessage message: String) {
+        displayAlert(withMessage: message, title: "Error")
     }
     
     func startLoading() {

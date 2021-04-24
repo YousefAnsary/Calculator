@@ -13,4 +13,8 @@ extension Data {
         return try JSONDecoder().decode(T.self, from: self)
     }
     
+    func toDictionary() throws -> [String: Any]? {
+        return try JSONSerialization.jsonObject(with: self, options: []) as? [String: Any]
+    }
+    
 }

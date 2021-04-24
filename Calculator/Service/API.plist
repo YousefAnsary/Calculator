@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>BaseURL</key>
-	<string></string>
+	<string>https://currencyconv.p.rapidapi.com/</string>
 </dict>
 </plist>

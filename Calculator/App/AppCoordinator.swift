@@ -19,19 +19,27 @@ class AppCoordinator {
     
     func start() {
         let calculatorVC = CalculatorVC(nibName: "CalculatorView", bundle: nil)
-//        let calculatorPresenter = CalculatorPresenter
-//        calculatorPresenter.delegate =
-//        calculatorVC.mediator =
-//        calculatorVC.presenter =
-//        let currentConverterVC = CalculatorVC(nibName: "CurrentConverterView", bundle: nil)
-//        let currentConverterPresenter = CurrentConverterPresenter
-//        currentConverterPresenter.delegate =
-//        currentConverterVC.mediator =
-//        currentConverterVC.presenter =
+        let currencyConverterVC = CurrencyConverterVC(nibName: "CurrencyConverterView", bundle: nil)
+        
+        let calculatorPresenter = CalculatorPresenter(delegate: calculatorVC)
+        let currencyConverterPresenter = CurrencyConverterPresenter(delegate: currencyConverterVC)
+        
+        let mediator = CurrencyCalculatorMediator(component1: calculatorPresenter, component2: currencyConverterPresenter)
+        
+        calculatorVC.presenter = calculatorPresenter
+        currencyConverterVC.presenter = currencyConverterPresenter
+        
+        calculatorPresenter.mediator = mediator
+        currencyConverterPresenter.mediator = mediator
+        
         tabBarController.addChild(calculatorVC)
-//        tabBarController.addChild(currentConverterVC)
+        tabBarController.addChild(currencyConverterVC)
+        
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
+        
+        tabBarController.tabBar.items?[0].image = UIImage(named: "calc")
+        tabBarController.tabBar.items?[1].image = UIImage(named: "dollar")
     }
     
 }

@@ -8,26 +8,67 @@
 import XCTest
 @testable import Calculator
 
-class CalculatorTests: XCTestCase {
+class CurrencyConverterMocker: CurrencyConverterDelegate {
+    
+    private let expectation: XCTestExpectation
+    private var amount: Double!
+    
+    init(expectation: XCTestExpectation) {
+        self.expectation = expectation
+    }
+    
+    func setAmount(_ amount: Double) {
+        self.amount = amount
+    }
+    
+    func conversion(successWithResult result: Double) {
+        guard let ratio = UserDefaultsManager.shared.EGP_USDRatio else {
+            XCTFail("No found ratios")
+            return
+        }
+        let res = amount * ratio
+        if result == res {
+            expectation.fulfill()
+        } else {
+            XCTFail("Expected \(res) found \(result)")
+        }
+    }
+    
+    func conversion(failedWithError error: APIError) {
+        XCTFail("Failed Conversion with error: \(error)")
+    }
+    
+    func startLoading() {}
+    
+    func dismissLoader() {}
+    
+    func displayAlert(withMessage message: String) {}
+    
+}
 
+class CurrencyConverterTest: XCTestCase {
+
+    var suit: CurrencyConverterPresenter?
+    var mocker: CurrencyConverterMocker?
+    var myExpectaion: XCTestExpectation?
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        myExpectaion = self.expectation(description: "Testing Currency Conversion")
+        mocker = CurrencyConverterMocker(expectation: myExpectaion!)
+        suit = CurrencyConverterPresenter(delegate: mocker!)
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        suit = nil
+        mocker = nil
+        myExpectaion = nil
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testConversion() throws {
+        let amount = "20"
+        mocker?.setAmount(Double(amount)!)
+        suit?.convert(amount: amount)
+        wait(for: [myExpectaion!], timeout: 30)
     }
 
 }

@@ -11,5 +11,6 @@ protocol Delegate: class {
     
     func startLoading()
     func dismissLoader()
+    func displayAlert(withMessage message: String)
     
 }
