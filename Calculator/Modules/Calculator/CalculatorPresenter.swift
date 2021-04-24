@@ -45,6 +45,7 @@ class CalculatorPresenter {
         
         if case MathOperator.divise = operation, secondOperand == 0 {
             delegate?.displayAlert(withMessage: "Can't divide by zero")
+            return
         }
         
         stateManager.newCalculation(MathOperation(operator: operation, firstOperand: firstOperand, secondOperand: secondOperand))

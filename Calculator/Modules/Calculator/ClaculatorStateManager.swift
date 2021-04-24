@@ -30,8 +30,12 @@ class ClaculatorStateManager {
         var lastState = current
         lastState.newOperation(op)
         
-        statesAccessQueue.async(flags: .barrier) {
-            self.states.append(lastState)
+//        statesAccessQueue.async(flags: .barrier) {
+//            self.states.append(lastState)
+//        }
+        
+        makeWriteOperationOnStates {
+            $0.append(lastState)
         }
         
         DispatchQueue.main.async {
@@ -116,9 +120,12 @@ class ClaculatorStateManager {
     /// Resets the counter to last index and assign all operations as non-copies
     private func resetCounter() {
         lastUndoneStateIndex = states.endIndex - 1
-        statesAccessQueue.async(flags: .barrier) {
-            self.states.resetCopies()
+        makeWriteOperationOnStates {
+            $0.resetCopies()
         }
+//        statesAccessQueue.async(flags: .barrier) {
+//            self.states.resetCopies()
+//        }
     }
     
     /// Fires Given Block on specific Dispatch Queue to assure a thread safe access

@@ -41,6 +41,7 @@
 		CABE703F26304606006CC7DC /* CurrencyConvertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABE703E26304606006CC7DC /* CurrencyConvertService.swift */; };
 		CABE704426305BC0006CC7DC /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABE704326305BC0006CC7DC /* UserDefaultsManager.swift */; };
 		CABE7049263068A2006CC7DC /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABE7048263068A2006CC7DC /* Double+.swift */; };
+		CAD71CB5263449E5001AFBBF /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD71CB4263449E5001AFBBF /* UITextField+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +102,7 @@
 		CABE703E26304606006CC7DC /* CurrencyConvertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConvertService.swift; sourceTree = "<group>"; };
 		CABE704326305BC0006CC7DC /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		CABE7048263068A2006CC7DC /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
+		CAD71CB4263449E5001AFBBF /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,6 +256,7 @@
 				CA73ECE0262F6986006D3139 /* UICollectionView+.swift */,
 				CA73ECF2262F7C56006D3139 /* Array+UIButton.swift */,
 				CABE7048263068A2006CC7DC /* Double+.swift */,
+				CAD71CB4263449E5001AFBBF /* UITextField+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -443,6 +446,7 @@
 				CABE703426302E03006CC7DC /* CurrencyConverterPresenter.swift in Sources */,
 				CABE704426305BC0006CC7DC /* UserDefaultsManager.swift in Sources */,
 				CABE702F26302DEF006CC7DC /* CurrencyConverterVC.swift in Sources */,
+				CAD71CB5263449E5001AFBBF /* UITextField+.swift in Sources */,
 				CA73ECE1262F6986006D3139 /* UICollectionView+.swift in Sources */,
 				CA1BB8B8262EFEA7001520AE /* AppDelegate.swift in Sources */,
 			);

@@ -29,8 +29,13 @@ class CurrencyConverterVC: BaseViewController {
         self.convertBtn.isEnabled = !egpTF.text!.isEmpty
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.egpTF.becomeFirstResponder()
+    }
+    
     //MARK: - Tap Handlers
     @IBAction private func convertBtnTapped(_ sender: UIButton) {
+        self.view.endEditing(true)
         resultLbl.text = "Loading..."
         presenter?.convert(amount: egpTF.text!)
     }

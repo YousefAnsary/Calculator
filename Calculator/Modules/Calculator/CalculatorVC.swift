@@ -32,6 +32,10 @@ class CalculatorVC: BaseViewController {
         operatorBtns = [plusBtn, minusBtn, multiplyBtn, diviseBtn]
         
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.secondOperandTF.becomeFirstResponder()
+    }
 
     //MARK: - Tap Handlers
     @IBAction private func undoBtnTapped(_ sender: UIButton) {
