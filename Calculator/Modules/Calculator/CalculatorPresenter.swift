@@ -101,6 +101,7 @@ extension CalculatorPresenter: CalculatorMediator {
     func currencyConversionMade(fromGivenAmount amount: String) {
         guard let amount = Double(amount) else {return}
         let finalRes = stateManager.current.finalResult
+        if amount == finalRes {return}
         let op: MathOperator = finalRes > amount ? .substract : .add
         let diff = abs(finalRes - amount)
         stateManager.newCalculation(MathOperation(operator: op, firstOperand: stateManager.current.finalResult, secondOperand: diff))
